@@ -16,5 +16,7 @@ test("Promo page add to basket", async ({ page }) => {
    const orderCart = page.locator("//a[@id='cart']");
    await orderCart.click();
 
+   await page.waitForURL("/en/order/")
+
    //await page.pause();
 });
