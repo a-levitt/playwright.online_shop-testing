@@ -6,4 +6,10 @@ export class ProductsPage {
     visit = async (link) => {
         await this.page.goto(link);
     }
+
+    addProductToCart = async (index) => {
+        const addToCartButtons =  this.page.getByRole('button').filter({ hasText: 'Add to cart' });
+        await addToCartButtons.nth(index).waitFor();
+        await addToCartButtons.nth(index).click();
+    }
 }
