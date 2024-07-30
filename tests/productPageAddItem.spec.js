@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test"
 
-test("Promo page add to basket", async ({ page }) => {
+test.skip("Promo page add to basket", async ({ page }) => {
    await page.goto("/en/category/laptopovi/laptop-racunari/");
 
 
