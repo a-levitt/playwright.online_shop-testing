@@ -4,6 +4,7 @@ export class FixedToolbar {
     constructor(page) {
         this.page = page;
         this.cartCount = page.locator("//span[@class='cart_count count']");
+        this.orderCart = page.locator("//li[@id='ft_cart']");  //span[@class='item_title hidden-xs']
     }
 
     // expectCartCount = async (expectedAmount) => {
@@ -19,4 +20,11 @@ export class FixedToolbar {
         return parseInt(text, 10); //radix (second argument) specifies number base
     }
 
+    goToCheckout = async () => {
+        const checkoutLink = this.orderCart;
+        await checkoutLink.waitFor();
+        await checkoutLink.click();
+
+        await this.page.waitForURL("/en/order/");
+    }
 }

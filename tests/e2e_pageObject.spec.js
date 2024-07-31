@@ -5,7 +5,7 @@ import { FixedToolbar } from "../page-objects/FixedToolbar.js";
 test("User full end-to-end purchase testing", async ({ page }) => {
 
     const productsPage = new ProductsPage(page);
-    //const fixedToolbar = new FixedToolbar(page);
+    const fixedToolbar = new FixedToolbar(page);
 
     await productsPage.visit("/en/category/laptopovi/laptop-racunari/");
 
@@ -18,6 +18,8 @@ test("User full end-to-end purchase testing", async ({ page }) => {
 
     await productsPage.addProductToCart(2);
     //await fixedToolbar.expectCartCount("3");
+
+    fixedToolbar.goToCheckout();
 
     await page.pause();
 });
