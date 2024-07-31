@@ -1,9 +1,9 @@
 import { expect } from "@playwright/test";
+import { FixedToolbar } from "./FixedToolbar.js";
 
 export class ProductsPage {
     constructor(page) {
         this.page = page;
-        this.cartCount = page.locator("//span[@class='cart_count count']");
         this.addToCartButtons = page.getByRole('button').filter({ hasText: 'Add to cart' });
     }
 
@@ -12,14 +12,14 @@ export class ProductsPage {
     }
 
     addProductToCart = async (index) => {
-        await this.addToCartButtons.nth(index).waitFor();
+        const AddItemButton = this.addToCartButtons.nth(index);
+        const fixedToolbar = new FixedToolbar(this.page)
 
-        await this.addToCartButtons.nth(index).click();
-    }
-
-    expectCartCount = async (expectedAmount) => {
-        await this.cartCount.waitFor();
-
-        await expect(this.cartCount).toHaveText(expectedAmount);
+        await AddItemButton.waitFor();
+        const cartCountBeforeAdding = await fixedToolbar.getCartCount(); 
+        await AddItemButton.click();
+        await this.page.waitForTimeout(1000);
+        const cartCountAfterAdding = await fixedToolbar.getCartCount();
+        expect(cartCountAfterAdding).toBeGreaterThan(cartCountBeforeAdding);
     }
 }
