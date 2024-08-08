@@ -37,6 +37,7 @@ test("User full end-to-end purchase testing", async ({ page }) => {
     await login.goToSignup();
 
     await registration.fillRegisterFields();
+    await fixedToolbar.goToCheckout();
 
-    //await page.pause();
+    await page.pause();
 });

@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export class RegisterPage {
     constructor(page) {
         this.page = page;
@@ -10,16 +12,20 @@ export class RegisterPage {
     }
 
     fillRegisterFields = async() => {
+
         await this.firstNameField.waitFor();
         await this.firstNameField.fill("Artemis"); 
         await this.lastNameField.waitFor();
         await this.lastNameField.fill("Levitt");
+        const emailGenerated = uuidv4() + "@playwrite.test"
         await this.emailField.waitFor();
-        await this.emailField.fill("test_email_playwright@gmail.com"); 
+        await this.emailField.fill(emailGenerated); 
+        const passwordGenerated = uuidv4();
+        console.warn("Generated password: " + passwordGenerated);
         await this.passwordField.waitFor();
-        await this.passwordField.fill("999password");
+        await this.passwordField.fill(passwordGenerated);
         await this.passwordConfirmField.waitFor();
-        await this.passwordConfirmField.fill("999password");
+        await this.passwordConfirmField.fill(passwordGenerated);
         await this.page.pause();
         await this.submitButton.waitFor();
         //await this.submitButton.click();
