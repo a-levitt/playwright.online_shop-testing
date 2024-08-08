@@ -5,6 +5,8 @@ export class ProductsPage {
     constructor(page) {
         this.page = page;
         this.addToCartButtons = page.getByRole('button').filter({ hasText: 'Add to cart' });
+        this.sortButton = page.getByRole('button', { name: 'Price' });
+        this.sortMethod = page.getByRole('link', { name: 'Name' });
     }
 
     visit = async (link) => {
@@ -21,5 +23,15 @@ export class ProductsPage {
         await this.page.waitForTimeout(1000);
         const cartCountAfterAdding = await fixedToolbar.getCartCount();
         expect(cartCountAfterAdding).toBeGreaterThan(cartCountBeforeAdding);
+    }
+
+    sortByName = async () => {
+        const SortButton = await this.sortButton;
+        await SortButton.waitFor();
+        await SortButton.click();
+
+        const SortMethod = await this.sortMethod;
+        await SortMethod.waitFor();
+        await SortMethod.click();
     }
 }
