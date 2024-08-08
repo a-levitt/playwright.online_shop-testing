@@ -40,5 +40,4 @@ export class Checkout {
         //await expect(itemsAfterRemoval).toHaveCount(itemsBeforeRemoval - 1);
         await expect(itemsAfterRemoval).toEqual(itemsBeforeRemoval - 1);
     }
-
 }

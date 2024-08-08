@@ -2,12 +2,14 @@ import { test } from "@playwright/test"
 import { ProductsPage } from "../page-objects/ProductsPage.js";
 import { FixedToolbar } from "../page-objects/FixedToolbar.js";
 import { Checkout } from "../page-objects/Checkout.js";
+import { LoginPage } from "../page-objects/LoginPage.js";
 
 test("User full end-to-end purchase testing", async ({ page }) => {
 
     const productsPage = new ProductsPage(page);
     const fixedToolbar = new FixedToolbar(page);
     const checkout = new Checkout(page);
+    const login = new LoginPage(page);
 
     await productsPage.visit("/en/category/laptopovi/laptop-racunari/");
 
@@ -29,6 +31,9 @@ test("User full end-to-end purchase testing", async ({ page }) => {
     fixedToolbar.goToCheckout();
 
     await checkout.removeCheapestProduct();
+
+    await productsPage.visit("/en/login/");
+    await login.goToSignup();
 
     await page.pause();
 });
