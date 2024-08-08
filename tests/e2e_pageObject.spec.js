@@ -1,9 +1,12 @@
 import { test } from "@playwright/test"
+import { v4 as uuidv4 } from 'uuid';
+
 import { ProductsPage } from "../page-objects/ProductsPage.js";
 import { FixedToolbar } from "../page-objects/FixedToolbar.js";
 import { Checkout } from "../page-objects/Checkout.js";
 import { LoginPage } from "../page-objects/LoginPage.js";
 import { RegisterPage } from "../page-objects/RegisterPage.js";
+
 
 test("User full end-to-end purchase testing", async ({ page }) => {
 
@@ -36,7 +39,10 @@ test("User full end-to-end purchase testing", async ({ page }) => {
     await productsPage.visit("/en/login/");
     await login.goToSignup();
 
-    await registration.fillRegisterFields();
+    const emailGenerated = uuidv4() + "@playwrite.test"
+    const passwordGenerated = uuidv4();
+    console.warn("Generated password: " + passwordGenerated);
+    await registration.fillRegisterFields(emailGenerated, passwordGenerated);
     await fixedToolbar.goToCheckout();
 
     await page.pause();
