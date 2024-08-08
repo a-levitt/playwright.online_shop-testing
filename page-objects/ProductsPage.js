@@ -8,6 +8,7 @@ export class ProductsPage {
         //this.sortButton = page.getByRole('button', { name: 'Price' });
         this.sortButton = page.locator("//button[@id='sort_dropdown']");
         this.sortMethod = page.getByRole('link', { name: 'Name' });
+        this.itemTitle = page.locator("//span[@itemprop='name']"); 
     }
 
     visit = async (link) => {
@@ -31,10 +32,16 @@ export class ProductsPage {
         await SortButton.waitFor();
         await SortButton.click();
 
+        await this.itemTitle.first().waitFor();
+        const titlesListBeforeSorting = await this.itemTitle.allInnerTexts();
+
         const SortMethod = await this.sortMethod;
         await SortMethod.waitFor();
         await SortMethod.click();
 
+        const titlesListAfterSorting = await this.itemTitle.allInnerTexts();
+
+        expect(titlesListAfterSorting).not.toEqual(titlesListBeforeSorting);
         expect(SortButton).toHaveText("Name");
     }
 }
