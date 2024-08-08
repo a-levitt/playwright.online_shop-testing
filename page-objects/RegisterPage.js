@@ -1,12 +1,12 @@
 export class RegisterPage {
     constructor(page) {
         this.page = page;
-        this.firstNameField = page.locator("//input[@title='First name']");
-        this.lastNameField = page.locator("//input[@title='Last name']");
-        this.emailField = page.locator("//input[@title='Email']");
+        this.firstNameField = page.getByRole('textbox', { name: 'First name'});
+        this.lastNameField = page.getByRole('textbox', { name: 'Last name'});
+        this.emailField = page.getByRole('textbox', { name: 'Email', exact: true});
         this.passwordField = page.locator("//input[@name='data[password]']");
         this.passwordConfirmField = page.locator("//input[@name='data[password_confirm]']");
-        this.submitButton = page.locator("//input[@type='submit']");
+        this.submitButton = page.getByRole('button', { name: 'Sign Up'});
     }
 
     fillRegisterFields = async(emailGenerated, passwordGenerated) => {
