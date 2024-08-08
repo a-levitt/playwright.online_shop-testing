@@ -3,18 +3,20 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { ProductsPage } from "../page-objects/ProductsPage.js";
 import { FixedToolbar } from "../page-objects/FixedToolbar.js";
-import { Checkout } from "../page-objects/Checkout.js";
+import { CheckoutPage } from "../page-objects/CheckoutPage.js";
 import { LoginPage } from "../page-objects/LoginPage.js";
 import { RegisterPage } from "../page-objects/RegisterPage.js";
+import { ShippingDetails } from "../page-objects/ShippingDetails.js";
 
 
 test("User full end-to-end purchase testing", async ({ page }) => {
 
     const productsPage = new ProductsPage(page);
     const fixedToolbar = new FixedToolbar(page);
-    const checkout = new Checkout(page);
+    const checkout = new CheckoutPage(page);
     const login = new LoginPage(page);
     const registration = new RegisterPage(page);
+    const deliveryDetails = new ShippingDetailsails(page);
 
     await productsPage.visit("/en/category/laptopovi/laptop-racunari/");
 
@@ -44,6 +46,9 @@ test("User full end-to-end purchase testing", async ({ page }) => {
     console.warn("Generated password: " + passwordGenerated);
     await registration.fillRegisterFields(emailGenerated, passwordGenerated);
     await fixedToolbar.goToCheckout();
+
+    await deliveryDetails.fillRemainFields();
+    await deliveryDetails.confirmOrder();
 
     await page.pause();
 });

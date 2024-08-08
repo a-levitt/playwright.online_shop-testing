@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 
-export class Checkout {
+export class CheckoutPage {
     constructor(page) {
         this.page = page;
         this.cartItems = page.locator("//div[@class='wa-products']/div");
