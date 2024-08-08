@@ -5,7 +5,8 @@ export class ProductsPage {
     constructor(page) {
         this.page = page;
         this.addToCartButtons = page.getByRole('button').filter({ hasText: 'Add to cart' });
-        this.sortButton = page.getByRole('button', { name: 'Price' });
+        //this.sortButton = page.getByRole('button', { name: 'Price' });
+        this.sortButton = page.locator("//button[@id='sort_dropdown']");
         this.sortMethod = page.getByRole('link', { name: 'Name' });
     }
 
@@ -33,5 +34,7 @@ export class ProductsPage {
         const SortMethod = await this.sortMethod;
         await SortMethod.waitFor();
         await SortMethod.click();
+
+        expect(SortButton).toHaveText("Name");
     }
 }

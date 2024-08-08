@@ -17,7 +17,8 @@ export class Checkout {
         //console.warn({allPricesTexts});
         const intPricesList = allPricesTexts.map((element) => {
             const currencySignReplaced = element.replace(" €", "");
-            return parseInt(currencySignReplaced, 10);
+            const comaSignReplaced = currencySignReplaced.replace(",", "");
+            return parseInt(comaSignReplaced, 10);
         })
         //console.warn({intPricesList});
         

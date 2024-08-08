@@ -15,8 +15,6 @@ test("User full end-to-end purchase testing", async ({ page }) => {
 
     await productsPage.sortByName();
 
-    await page.pause();
-
     await productsPage.addProductToCart(0);
     //await fixedToolbar.expectCartCount("1");
 
@@ -29,5 +27,5 @@ test("User full end-to-end purchase testing", async ({ page }) => {
 
     await checkout.removeCheapestProduct();
 
-    //await page.pause();
+    await page.pause();
 });
