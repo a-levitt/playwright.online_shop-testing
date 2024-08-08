@@ -9,6 +9,7 @@ export class ProductsPage {
         this.sortButton = page.locator("//button[@id='sort_dropdown']");
         this.sortMethod = page.getByRole('link', { name: 'Name' });
         this.itemTitle = page.locator("//span[@itemprop='name']"); 
+        this.checkboxFilerScreen = page.getByLabel('17.3"');
     }
 
     visit = async (link) => {
@@ -43,5 +44,10 @@ export class ProductsPage {
 
         expect(titlesListAfterSorting).not.toEqual(titlesListBeforeSorting);
         expect(SortButton).toHaveText("Name");
+    }
+
+    filterScreenSize = async () => {
+        await this.checkboxFilerScreen.waitFor();
+        await this.checkboxFilerScreen.click();
     }
 }
