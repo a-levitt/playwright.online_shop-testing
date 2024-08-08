@@ -49,5 +49,7 @@ export class ProductsPage {
     filterScreenSize = async () => {
         await this.checkboxFilerScreen.waitFor();
         await this.checkboxFilerScreen.click();
+        await this.page.waitForURL(/\/en\/category\/laptopovi\/laptop-racunari\//);
+        //"?veli_ina_ekrana2[]=1794")
     }
 }
