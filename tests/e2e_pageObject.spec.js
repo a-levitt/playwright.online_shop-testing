@@ -16,7 +16,6 @@ test("User full end-to-end purchase testing", async ({ page }) => {
     //await fixedToolbar.expectCartCount("0");
 
     await productsPage.filterScreenSize();
-    await page.pause();
 
     await productsPage.sortByName();
 

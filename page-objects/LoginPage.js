@@ -8,5 +8,6 @@ export class LoginPage {
     goToSignup = async() => {
         await this.signUpLink.waitFor();
         await this.signUpLink.click();
+        this.page.waitForURL(/\/en\/signup\//);
     }
 }
