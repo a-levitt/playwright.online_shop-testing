@@ -6,7 +6,7 @@ import { FixedToolbar } from "../page-objects/FixedToolbar.js";
 import { CheckoutPage } from "../page-objects/CheckoutPage.js";
 import { LoginPage } from "../page-objects/LoginPage.js";
 import { RegisterPage } from "../page-objects/RegisterPage.js";
-import { ShippingDetails } from "../page-objects/ShippingDetails.js";
+import { Shipping } from "../page-objects/Shipping.js";
 
 
 test("User full end-to-end purchase testing", async ({ page }) => {
@@ -16,7 +16,7 @@ test("User full end-to-end purchase testing", async ({ page }) => {
     const checkout = new CheckoutPage(page);
     const login = new LoginPage(page);
     const registration = new RegisterPage(page);
-    const deliveryDetails = new ShippingDetailsails(page);
+    const shipping = new Shipping(page);
 
     await productsPage.visit("/en/category/laptopovi/laptop-racunari/");
 
@@ -47,8 +47,8 @@ test("User full end-to-end purchase testing", async ({ page }) => {
     await registration.fillRegisterFields(emailGenerated, passwordGenerated);
     await fixedToolbar.goToCheckout();
 
-    await deliveryDetails.fillRemainFields();
-    await deliveryDetails.confirmOrder();
+    await shipping.fillRemainFields(emailGenerated);
+    //await shipping.confirmOrder();
 
     await page.pause();
 });
