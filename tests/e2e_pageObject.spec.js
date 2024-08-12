@@ -48,7 +48,7 @@ test("User full end-to-end purchase testing", async ({ page }) => {
     await fixedToolbar.goToCheckout();
 
     await shipping.fillRemainFields(emailGenerated);
-    //await shipping.confirmOrder();
+    await shipping.confirmOrder();
 
     await page.pause();
 });

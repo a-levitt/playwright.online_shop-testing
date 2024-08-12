@@ -16,6 +16,8 @@ export class Shipping {
         this.comboShipping = page.getByText('Select a shipping option');
         this.comboShipOption = page.getByText('Podgorica, Donja Gorica,');
 
+        this.paymentMethod = page.locator('div').filter({ hasText: /^ONLINEVISA, Mastercard, Maestro, American Express$/ }).first();
+        this.buttonConfirm = page.getByRole("button", { name : 'Confirm order'});
     }
 
     fillRemainFields = async(emailGenerated) => {
@@ -51,6 +53,10 @@ export class Shipping {
     };
     
     confirmOrder = async() => {
-        
+        await this.paymentMethod.waitFor();
+        await this.paymentMethod.click();
+        await this.buttonConfirm.waitFor();
+        //await this.buttonConfirm.click();
+        console.warn("You paid the order!");
     };
 }
