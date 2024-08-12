@@ -7,6 +7,8 @@ import { CheckoutPage } from "../page-objects/CheckoutPage.js";
 import { LoginPage } from "../page-objects/LoginPage.js";
 import { RegisterPage } from "../page-objects/RegisterPage.js";
 import { Shipping } from "../page-objects/Shipping.js";
+import { deliveryDetails } from "../data/deliveryDetails.js";
+
 
 
 test("User full end-to-end purchase testing", async ({ page }) => {
@@ -44,10 +46,10 @@ test("User full end-to-end purchase testing", async ({ page }) => {
     const emailGenerated = uuidv4() + "@playwrite.test"
     const passwordGenerated = uuidv4();
     console.warn("Generated password: " + passwordGenerated);
-    await registration.fillRegisterFields(emailGenerated, passwordGenerated);
+    await registration.fillRegisterFields(emailGenerated, passwordGenerated,  deliveryDetails);
     await fixedToolbar.goToCheckout();
 
-    await shipping.fillRemainFields(emailGenerated);
+    await shipping.fillRemainFields(emailGenerated, deliveryDetails);
     await shipping.confirmOrder();
 
     await page.pause();
