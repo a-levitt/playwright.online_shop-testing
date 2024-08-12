@@ -1,3 +1,5 @@
+import { deliveryDetails } from "../data/deliveryDetails";
+
 export class RegisterPage {
     constructor(page) {
         this.page = page;
@@ -12,9 +14,9 @@ export class RegisterPage {
     fillRegisterFields = async(emailGenerated, passwordGenerated) => {
 
         await this.firstNameField.waitFor();
-        await this.firstNameField.fill("Artemis"); 
+        await this.firstNameField.fill(deliveryDetails.firstName); 
         await this.lastNameField.waitFor();
-        await this.lastNameField.fill("Levitt");
+        await this.lastNameField.fill(deliveryDetails.lastName);
         await this.emailField.waitFor();
         await this.emailField.fill(emailGenerated); 
         await this.passwordField.waitFor();

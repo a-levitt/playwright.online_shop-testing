@@ -1,4 +1,5 @@
-import { expect } from "@playwright/test";
+//import { expect } from "@playwright/test";
+import { deliveryDetails } from "../data/deliveryDetails";
 
 export class Shipping {
     constructor(page) {
@@ -23,18 +24,18 @@ export class Shipping {
     fillRemainFields = async(emailGenerated) => {
         await this.firstName.waitFor();
         //const actualName = await this.firstName; 
-        //expect(actualName).toEqual("Artemis");
-        await this.firstName.fill("Artemii");
+        //expect(actualName).toEqual(deliveryDetails.firstName);
+        await this.firstName.fill(deliveryDetails.firstName);
         await this.lastName.waitFor();
         //const actualFamilyname = await this.lastName; 
-        //expect(actualFamilyname).toEqual("Levitt");
-        await this.lastName.fill("Levitt");
+        //expect(actualFamilyname).toEqual(deliveryDetails.lastName);
+        await this.lastName.fill(deliveryDetails.lastName);
         await this.phone.waitFor();
-        await this.phone.fill("+3 (826) 777-66-55");
+        await this.phone.fill(deliveryDetails.phoneNumber);
         await this.email.waitFor();
         //const actualEmail = await this.email; 
         //expect(actualEmail).toEqual(emailGenerated);
-        await this.email.fill("alevitt@playwright.test");
+        await this.email.fill(deliveryDetails.testEmail);
         await this.checkboxPolicy.waitFor();
         await this.checkboxPolicy.click();
         await this.comboCity.waitFor();
@@ -43,7 +44,7 @@ export class Shipping {
         //await this.comboPG.waitFor();
         //await this.comboPG.click();
         await this.address.waitFor();
-        await this.address.fill("13. jula 19");
+        await this.address.fill(deliveryDetails.address);
         await this.page.keyboard.press('Enter');
 
         await this.comboShipping.waitFor();
