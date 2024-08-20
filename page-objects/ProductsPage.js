@@ -1,6 +1,11 @@
 import { expect } from "@playwright/test";
 import { FixedToolbar } from "./FixedToolbar.js";
 
+const isDesktopViewport = (page) => {
+    const displaySize = page.viewportSize();
+    return displaySize.width >= 600; //px
+}
+
 export class ProductsPage {
     constructor(page) {
         this.page = page;
@@ -46,10 +51,14 @@ export class ProductsPage {
         expect(SortButton).toHaveText("Name");
     }
 
+
     filterScreenSize = async () => {
-        await this.checkboxFilerScreen.waitFor();
-        await this.checkboxFilerScreen.click();
-        await this.page.waitForURL(/\/en\/category\/laptopovi\/laptop-racunari\//);
-        //"?veli_ina_ekrana2[]=1794")
+        // desktop viewport only
+        if (isDesktopViewport(this.page)) {
+            await this.checkboxFilerScreen.waitFor();
+            await this.checkboxFilerScreen.click();
+            await this.page.waitForURL(/\/en\/category\/laptopovi\/laptop-racunari\//);
+            //"?veli_ina_ekrana2[]=1794")
+        }
     }
 }
