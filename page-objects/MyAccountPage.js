@@ -5,6 +5,5 @@ export class MyAcountPage {
 
     visit = async () => {
         await this.page.goto("/en/my/profile/");
-        await this.page.pause();
     }
 }
