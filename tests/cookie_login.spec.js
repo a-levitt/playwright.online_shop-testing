@@ -1,6 +1,3 @@
-import * as dotenv from "dotenv";
-dotenv.config;
-
 import { test } from "@playwright/test";
 import { MyAcountPage } from "../page-objects/MyAccountPage.js";
 //import { getLoinToken } from "../api-calls/getLoginToken.js";
@@ -13,7 +10,7 @@ test.only("Test cookie injection login", async ({ page }) => {
     //await getLoginToken(userData.login, userData.password);
 
     await page.evaluate(() => {
-        document.cookie="auth_token=b36355542d5f2b74992290ea4b4d4e178a5";
+        document.cookie="auth_token=" + process.env.AUTH_TOKEN;
     })
     await myAccount.visit();
     await page.pause();
