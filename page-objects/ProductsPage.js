@@ -1,10 +1,7 @@
 import { expect } from "@playwright/test";
 import { FixedToolbar } from "./FixedToolbar.js";
+import { isDesktopViewport } from "../utils/Viewports.js"
 
-const isDesktopViewport = (page) => {
-    const displaySize = page.viewportSize();
-    return displaySize.width >= 600; //px
-}
 
 export class ProductsPage {
     constructor(page) {
