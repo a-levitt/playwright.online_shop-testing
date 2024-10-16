@@ -21,7 +21,13 @@ test.skip("Test cookie injection login", async ({ page }) => {
 
 test.only("Test cookie injection login and mocking network request", async ({ page }) => {
 
-    await page.route()
+    await page.route("**/en/my/profile/", async (route, request) => {
+        await route.fulfill({
+            status: 500,
+            contentType: "application/json",
+            body: JSON.stringify({message: "PLAYWRIGHT ERROR FROM MOCKING"})
+        });
+    });
 
     const myAccount = new MyAcountPage(page);
     await myAccount.visit();
